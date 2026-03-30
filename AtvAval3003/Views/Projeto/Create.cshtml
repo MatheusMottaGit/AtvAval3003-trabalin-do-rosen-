@@ -34,7 +34,9 @@
                             <div class="col-md-4">
                                 <div class="form-group mb-3">
                                     <label asp-for="Ano" class="form-label small fw-bold text-muted text-uppercase"></label>
-                                    <input asp-for="Ano" class="form-control form-control-clean" value="@DateTime.Now.Year" />
+                                    @* Adicionado 'readonly' para desabilitar a edição e manter o envio do valor *@
+                                    <input asp-for="Ano" class="form-control form-control-clean bg-light"
+                                           value="@DateTime.Now.Year" readonly />
                                     <span asp-validation-for="Ano" class="text-danger small"></span>
                                 </div>
                             </div>
