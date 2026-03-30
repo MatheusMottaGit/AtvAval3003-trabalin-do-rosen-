@@ -1,4 +1,7 @@
+using academico.Repositories;
+
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddSingleton<IProjetoRepository, ProjetoRepository>();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();

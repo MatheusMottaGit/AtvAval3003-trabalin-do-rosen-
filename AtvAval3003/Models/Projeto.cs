@@ -2,20 +2,12 @@
 
 namespace academico.Models
 {
-    // O Enum pode ficar aqui fora (acessível como StatusProjeto)
     public enum StatusProjeto
     {
-        [Display(Name = "Em desenvolvimento")]
-        EmDesenvolvimento = 1,
-
-        [Display(Name = "Em condições de defesa")]
-        EmCondicoesDeDefesa = 2,
-
-        [Display(Name = "Completo sem implantar")]
-        CompletoSemImplantar = 3,
-
-        [Display(Name = "Implantado")]
-        Implantado = 4
+        [Display(Name = "Em desenvolvimento")] EmDesenvolvimento = 1,
+        [Display(Name = "Em condições de defesa")] EmCondicoesDeDefesa = 2,
+        [Display(Name = "Completo sem implantar")] CompletoSemImplantar = 3,
+        [Display(Name = "Implantado")] Implantado = 4
     }
 
     public class Projeto
@@ -23,18 +15,19 @@ namespace academico.Models
         [Key]
         public int ProjetoId { get; set; }
 
-        [Required(ErrorMessage = "O nome do projeto é obrigatório.")]
-        [StringLength(150)]
+        [Required(ErrorMessage = "O nome é obrigatório.")]
+        [StringLength(100, ErrorMessage = "O nome não pode ultrapassar 100 caracteres.")]
         public string Nome { get; set; } = string.Empty;
 
         [Required(ErrorMessage = "A sigla é obrigatória.")]
-        [StringLength(10)]
+        [RegularExpression(@"^\S+$", ErrorMessage = "A sigla não pode conter espaços.")]
         public string Sigla { get; set; } = string.Empty;
 
         [Required(ErrorMessage = "O ano é obrigatório.")]
-        public int Ano { get; set; }
+        [Range(2026, 2026, ErrorMessage = "O projeto deve ser do ano atual (2026).")]
+        public int Ano { get; set; } = DateTime.Now.Year;
 
-        [Required(ErrorMessage = "O status deve ser selecionado.")]
+        [Required(ErrorMessage = "Selecione um status.")]
         public StatusProjeto Status { get; set; }
     }
 }
