@@ -1,50 +1,86 @@
 ﻿@model academico.Models.Projeto
 
 @{
-    ViewData["Title"] = "Delete";
+    ViewData["Title"] = "Excluir Projeto";
 }
 
-<h1>Delete</h1>
+<div class="container mt-5">
+    <div class="mb-4 border-bottom border-danger pb-3">
+        <h2 class="fw-light text-danger mb-0">Confirmar Exclusão</h2>
+        <small class="text-muted text-uppercase" style="letter-spacing: 1px;">Esta ação não poderá ser desfeita</small>
+    </div>
 
-<h3>Are you sure you want to delete this?</h3>
-<div>
-    <h4>Projeto</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ProjetoId)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ProjetoId)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Nome)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Nome)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Sigla)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Sigla)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Ano)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Ano)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Status)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Status)
-        </dd>
-    </dl>
-    
-    <form asp-action="Delete">
-        <input type="submit" value="Delete" class="btn btn-danger" /> |
-        <a asp-action="Index">Back to List</a>
-    </form>
+    <div class="row">
+        <div class="col-md-8 col-lg-6">
+            <div class="card border-0 shadow-sm rounded-4 bg-white mb-4">
+                <div class="card-body p-4">
+                    <p class="text-secondary mb-4">Você está prestes a remover o seguinte registro do sistema:</p>
+
+                    <div class="p-3 bg-light rounded-3 mb-4 border-start border-4 border-danger">
+                        <label class="small fw-bold text-muted text-uppercase d-block mb-1">Projeto</label>
+                        <h5 class="fw-bold text-dark mb-1">@Model.Nome</h5>
+                        <span class="badge bg-secondary">@Model.Sigla</span>
+                        <span class="text-muted ms-2 small">Ano: @Model.Ano</span>
+                    </div>
+
+                    <form asp-action="Delete">
+                        @* Importante: Manter o ID oculto para o POST *@
+                        <input type="hidden" asp-for="ProjetoId" />
+
+                        <div class="d-flex gap-2">
+                            <button type="submit" class="btn-clean btn-danger-minimal flex-grow-1">
+                                EXCLUIR PERMANENTEMENTE
+                            </button>
+                            <a asp-action="Index" class="btn-clean btn-outline-minimal text-center">
+                                CANCELAR
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
+
+<style>
+    /* Estilos minimalistas consistentes com o restante do app */
+    .btn-clean {
+        display: inline-block;
+        padding: 12px 25px;
+        font-size: 0.7rem;
+        font-weight: 700;
+        letter-spacing: 1px;
+        text-decoration: none;
+        text-transform: uppercase;
+        border-radius: 6px;
+        transition: all 0.25s ease;
+        border: 1px solid transparent;
+    }
+
+    .btn-danger-minimal {
+        background-color: #dc3545;
+        color: #fff !important;
+    }
+
+        .btn-danger-minimal:hover {
+            background-color: #bb2d3b;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(220, 53, 69, 0.2);
+        }
+
+    .btn-outline-minimal {
+        background-color: transparent;
+        color: #666;
+        border-color: #ddd;
+    }
+
+        .btn-outline-minimal:hover {
+            background-color: #f8f9fa;
+            color: #333;
+        }
+
+    /* Ajuste de tipografia */
+    h2 {
+        letter-spacing: -1px;
+    }
+</style>

@@ -1,6 +1,81 @@
 ﻿@{
-    ViewData["Title"] = "Privacy Policy";
+    ViewData["Title"] = "Política de Privacidade";
 }
-<h1>@ViewData["Title"]</h1>
 
-<p>Use this page to detail your site's privacy policy.</p>
+<div class="container mt-5">
+    <div class="mb-5 border-bottom pb-3 text-center">
+        <h1 class="display-4 fw-light text-dark mb-0">Privacidade</h1>
+        <p class="text-muted text-uppercase small tracking-widest mt-2">Compromisso com a Transparência</p>
+    </div>
+
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6">
+            <div class="card border-0 shadow-sm rounded-4 bg-white">
+                <div class="card-body p-5 text-center">
+                    <div class="mb-4">
+                        <i class="bi bi-shield-lock display-1 text-primary opacity-25"></i>
+                    </div>
+
+                    <h3 class="fw-bold text-dark mb-3">Privacidade? Temos (quase) nenhuma.</h3>
+
+                    <p class="text-secondary mb-4">
+                        Para ser bem sincero com o <strong>Professor Rosenclever</strong>, este projeto utiliza o padrão
+                        <em>In-Memory Repository</em>. Isso significa que:
+                    </p>
+
+                    <ul class="list-unstyled text-start mx-auto d-inline-block mb-4">
+                        <li class="mb-2"><i class="bi bi-check2 text-primary me-2"></i> <strong>Zero Banco de Dados:</strong> Nada é gravado permanentemente.</li>
+                        <li class="mb-2"><i class="bi bi-check2 text-primary me-2"></i> <strong>Zero Cookies:</strong> Não rastreamos seus passos.</li>
+                        <li class="mb-2"><i class="bi bi-check2 text-primary me-2"></i> <strong>Vida Curta:</strong> Deu F5 ou reiniciou o App? Os dados sumiram.</li>
+                    </ul>
+
+                    <div class="bg-light p-3 rounded-3 mb-4">
+                        <small class="text-muted italic">
+                            "O que acontece no Localhost, morre no Localhost."
+                        </small>
+                    </div>
+
+                    <div class="pt-2">
+                        <a asp-controller="Home" asp-action="Index" class="btn-clean btn-dark-minimal w-100">
+                            ENTENDI, PODE VOLTAR
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <p class="text-center mt-4 small text-muted">
+                Atividade Avaliativa • Sistemas de Informação • 2026
+            </p>
+        </div>
+    </div>
+</div>
+
+<style>
+    /* Mantendo a consistência dos botões Clean */
+    .btn-clean {
+        display: inline-block;
+        padding: 12px 30px;
+        font-size: 0.75rem;
+        font-weight: 700;
+        letter-spacing: 1.5px;
+        text-decoration: none;
+        text-transform: uppercase;
+        border-radius: 6px;
+        transition: all 0.25s ease;
+        border: 1px solid transparent;
+    }
+
+    .btn-dark-minimal {
+        background-color: #121212;
+        color: #fff !important;
+    }
+
+        .btn-dark-minimal:hover {
+            background-color: #333;
+            transform: translateY(-2px);
+        }
+
+    .tracking-widest {
+        letter-spacing: 2px;
+    }
+</style>

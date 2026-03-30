@@ -1,59 +1,97 @@
 ﻿@model IEnumerable<academico.Models.Projeto>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Projetos";
 }
 
-<h1>Index</h1>
+<div class="container mt-5">
+    <div class="d-flex justify-content-between align-items-end mb-4 border-bottom pb-3">
+        <div>
+            <h2 class="fw-light text-dark mb-0">Gestão de Projetos</h2>
+            <small class="text-muted text-uppercase" style="letter-spacing: 1px;">Sistemas de Informação</small>
+        </div>
+        <a asp-action="Create" class="btn btn-dark btn-sm px-3 shadow-sm">
+            + NOVO PROJETO
+        </a>
+    </div>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.ProjetoId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Nome)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Sigla)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Ano)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Status)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.ProjetoId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Nome)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Sigla)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Ano)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Status)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id=item.ProjetoId }) |
-                @Html.ActionLink("Details", "Details", new { id=item.ProjetoId }) |
-                @Html.ActionLink("Delete", "Delete", new { id=item.ProjetoId })
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+    <div class="table-responsive">
+        <table class="table table-sm table-borderless align-middle">
+            <thead class="text-muted border-bottom" style="font-size: 0.85rem;">
+                <tr>
+                    <th class="py-3">NOME DO PROJETO</th>
+                    <th class="py-3 text-center">SIGLA</th>
+                    <th class="py-3 text-center">ANO</th>
+                    <th class="py-3 text-center">STATUS</th>
+                    <th class="py-3 text-end">AÇÕES</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr class="border-bottom-subtle">
+                        <td class="py-3">
+                            <span class="d-block fw-bold text-dark">@item.Nome</span>
+                            <small class="text-muted">ID: #@item.ProjetoId</small>
+                        </td>
+                        <td class="text-center text-secondary">@item.Sigla</td>
+                        <td class="text-center text-secondary">@item.Ano</td>
+                        <td class="text-center">
+                            @* Aqui usamos uma bolinha discreta e o nome amigável *@
+                            <span class="status-dot @item.Status.ToString().ToLower()"></span>
+                            <small class="text-secondary">
+                                @* Lógica para exibir o nome bonito *@
+                                @(item.Status switch {
+                                    academico.Models.StatusProjeto.EmDesenvolvimento => "Em desenvolvimento",
+                                    academico.Models.StatusProjeto.EmCondicoesDeDefesa => "Em condições de defesa",
+                                    academico.Models.StatusProjeto.CompletoSemImplantar => "Completo (não implantado)",
+                                    academico.Models.StatusProjeto.Implantado => "Implantado",
+                                    _ => item.Status.ToString()
+                                })
+                            </small>
+                        </td>
+                        <td class="text-end">
+                            <div class="action-links">
+                                <a asp-action="Edit" asp-route-id="@item.ProjetoId" class="text-decoration-none link-secondary me-2" title="Editar">Editar</a>
+                                <a asp-action="Details" asp-route-id="@item.ProjetoId" class="text-decoration-none link-secondary me-2" title="Ver">Ver</a>
+                                <a asp-action="Delete" asp-route-id="@item.ProjetoId" class="text-decoration-none link-danger" title="Excluir">Excluir</a>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<style>
+    /* Estilo para as linhas da tabela ficarem mais leves */
+    .border-bottom-subtle {
+        border-bottom: 1px solid #f1f1f1;
+    }
+
+    /* Links de ação discretos */
+    .action-links a {
+        font-size: 0.85rem;
+        transition: opacity 0.2s;
+    }
+    .action-links a:hover {
+        opacity: 0.7;
+    }
+
+    /* Indicador de Status minimalista (bolinha) */
+    .status-dot {
+        display: inline-block;
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        margin-right: 5px;
+    }
+    .emdesenvolvimento { background-color: #0dcaf0; }
+    .emcondicoesdedefesa { background-color: #ffc107; }
+    .completosemimplantar { background-color: #6c757d; }
+    .implantado { background-color: #198754; }
+
+    /* Remove o negrito das th */
+    th { font-weight: 500; }
+</style>

@@ -7,46 +7,87 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/AtvAval3003.styles.css" asp-append-version="true" />
+    @* Importante para os ícones funcionarem em todo o site *@
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 </head>
-<body>
+<body class="bg-light">
+    @* Fundo levemente cinza para destacar os cards brancos *@
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">AtvAval3003</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark shadow-sm py-3">
+            <div class="container">
+                <a class="navbar-brand fw-bold tracking-tight" asp-area="" asp-controller="Home" asp-action="Index">
+                    <span class="text-primary">ATV</span>AVAL3003
+                </a>
+                <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
+                    <ul class="navbar-nav ms-auto">
+                        @* ms-auto joga o menu para a direita *@
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            <a class="nav-link text-uppercase small fw-semibold px-3" asp-area="" asp-controller="Home" asp-action="Index">Início</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                            <a class="nav-link text-uppercase small fw-semibold px-3" asp-area="" asp-controller="Projeto" asp-action="Index">Projetos</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Projeto" asp-action="Index">Projeto</a>
+                        <li class="nav-item ms-lg-3">
+                            <a class="nav-link text-uppercase small fw-semibold bg-primary text-white rounded-pill px-4" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
                     </ul>
                 </div>
             </div>
         </nav>
     </header>
-    <div class="container">
+
+    <div class="container mt-4">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2026 - AtvAval3003 - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+    <footer class="footer text-muted bg-white border-top py-4 mt-5">
+        <div class="container text-center">
+            <small>&copy; 2026 - <span class="fw-bold">Arthur & Matheus</span> - SI • <a asp-area="" asp-controller="Home" asp-action="Privacy" class="text-decoration-none">Privacidade</a></small>
         </div>
     </footer>
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+
+    <style>
+        /* Ajustes Modernos */
+        .navbar-brand {
+            letter-spacing: -1px;
+            font-size: 1.4rem;
+        }
+
+        .nav-link {
+            letter-spacing: 1px;
+            transition: color 0.3s ease;
+        }
+
+            .nav-link:hover {
+                color: #0d6efd !important;
+            }
+
+        .tracking-tight {
+            letter-spacing: -1px;
+        }
+
+        /* Ajuste para o rodapé não ficar colado */
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        main {
+            flex: 1;
+        }
+    </style>
+
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
